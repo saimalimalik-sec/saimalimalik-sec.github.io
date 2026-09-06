@@ -33,3 +33,271 @@
   .scanlines{
     position:fixed; inset:0; pointer-events:none; z-index:50;
     background:repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.015) 0px,
+      rgba(255,255,255,0.015) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+    mix-blend-mode:overlay;
+  }
+
+  .wrap{max-width:720px; margin:0 auto; padding:32px 20px 80px;}
+
+  /* Terminal window */
+  .terminal{
+    background:var(--panel);
+    border:1px solid var(--panel-border);
+    border-radius:8px;
+    overflow:hidden;
+    box-shadow:0 0 0 1px rgba(255,184,107,0.04), 0 20px 60px rgba(0,0,0,0.5);
+  }
+  .terminal-bar{
+    display:flex; align-items:center; gap:8px;
+    padding:10px 14px;
+    background:#161b21;
+    border-bottom:1px solid var(--panel-border);
+  }
+  .dot{width:10px; height:10px; border-radius:50%;}
+  .dot.r{background:#ff5f57;}
+  .dot.y{background:#febc2e;}
+  .dot.g{background:#28c840;}
+  .terminal-title{
+    margin-left:8px;
+    font-size:12px;
+    color:var(--text-dim);
+  }
+  .terminal-body{
+    padding:24px 20px 28px;
+    font-size:14px;
+    min-height:210px;
+  }
+  .terminal-body .line{margin:0 0 6px;}
+  .prompt{color:var(--green-ok);}
+  .path{color:var(--amber);}
+  .cursor{
+    display:inline-block; width:8px; height:16px;
+    background:var(--amber);
+    vertical-align:middle;
+    animation:blink 1s steps(1) infinite;
+  }
+  @keyframes blink{50%{opacity:0;}}
+  #typedName{color:var(--text); font-weight:700;}
+  #typedTitle{color:var(--text-dim);}
+
+  /* Sections */
+  section{margin-top:56px;}
+  h2{
+    font-family:'JetBrains Mono',monospace;
+    font-size:13px;
+    letter-spacing:0.02em;
+    color:var(--amber);
+    margin:0 0 16px;
+    padding-bottom:10px;
+    border-bottom:1px solid var(--panel-border);
+  }
+  h2::before{content:"# "; color:var(--amber-dim);}
+
+  p{color:var(--text); max-width:62ch;}
+  .dim{color:var(--text-dim);}
+
+  .card{
+    background:var(--panel);
+    border:1px solid var(--panel-border);
+    border-radius:6px;
+    padding:16px 18px;
+  }
+
+  .cert-row{
+    display:flex; justify-content:space-between; align-items:baseline;
+    padding:10px 0;
+    border-bottom:1px solid var(--panel-border);
+    font-size:14px;
+  }
+  .cert-row:last-child{border-bottom:none;}
+  .cert-name{color:var(--text);}
+  .cert-code{color:var(--text-dim); font-family:'JetBrains Mono',monospace; font-size:12px;}
+
+  .skill{margin-bottom:14px;}
+  .skill-top{display:flex; justify-content:space-between; font-size:13px; margin-bottom:6px;}
+  .skill-name{color:var(--text);}
+  .skill-pct{color:var(--amber); font-family:'JetBrains Mono',monospace;}
+  .bar{height:6px; background:#1b2128; border-radius:3px; overflow:hidden;}
+  .bar-fill{
+    height:100%; background:linear-gradient(90deg, var(--amber-dim), var(--amber));
+    width:0%;
+    transition:width 1.1s ease;
+  }
+
+  .role{
+    display:flex; gap:14px; padding:14px 0;
+    border-bottom:1px solid var(--panel-border);
+  }
+  .role:last-child{border-bottom:none;}
+  .role-marker{color:var(--green-ok); font-family:'JetBrains Mono',monospace; font-size:13px; padding-top:2px;}
+  .role-title{font-weight:600; color:var(--text); font-size:15px;}
+  .role-meta{color:var(--text-dim); font-size:13px; margin:2px 0 6px;}
+  .role-desc{color:var(--text); font-size:14px; margin:0;}
+
+  .connect-list{display:flex; flex-direction:column; gap:10px;}
+  .connect-link{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:12px 16px;
+    border:1px solid var(--panel-border);
+    border-radius:6px;
+    color:var(--text);
+    text-decoration:none;
+    font-size:14px;
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .connect-link:hover{border-color:var(--amber-dim); background:#161b21;}
+  .connect-arrow{color:var(--amber); font-family:'JetBrains Mono',monospace;}
+
+  footer{
+    margin-top:64px;
+    text-align:center;
+    color:var(--text-dim);
+    font-size:12px;
+    font-family:'JetBrains Mono',monospace;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .cursor{animation:none;}
+    .bar-fill{transition:none;}
+  }
+</style>
+</head>
+<body>
+<div class="scanlines"></div>
+
+<div class="wrap">
+
+  <div class="terminal">
+    <div class="terminal-bar">
+      <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+      <span class="terminal-title mono">saim@pentest:~</span>
+    </div>
+    <div class="terminal-body mono">
+      <p class="line dim">Last login: Wed Sep 3 09:14:22 on ttys002</p>
+      <p class="line"><span class="prompt">saim@pentest</span>:<span class="path">~</span>$ whoami</p>
+      <p class="line" id="typedLine1"></p>
+      <p class="line"><span class="prompt">saim@pentest</span>:<span class="path">~</span>$ cat title.txt</p>
+      <p class="line" id="typedLine2"></p>
+      <p class="line"><span class="prompt">saim@pentest</span>:<span class="path">~</span>$ <span class="cursor"></span></p>
+    </div>
+  </div>
+
+  <section id="about">
+    <h2>about</h2>
+    <p>Web Penetration Tester and Ethical Hacker based in Islamabad, Pakistan, focused on identifying and responsibly reporting vulnerabilities in web applications and network infrastructure.</p>
+    <p>Currently contributing to <strong>PKCERT</strong> (National CERT of Pakistan), working on their CTF platform, VDP portal, and Cyber Patriot program.</p>
+  </section>
+
+  <section id="certs">
+    <h2>certifications</h2>
+    <div class="card">
+      <div class="cert-row">
+        <span class="cert-name">Certified Ethical Hacker</span>
+        <span class="cert-code">CEH</span>
+      </div>
+      <div class="cert-row">
+        <span class="cert-name">Cisco Certified Network Associate</span>
+        <span class="cert-code">CCNA</span>
+      </div>
+      <div class="cert-row">
+        <span class="cert-name">Diploma in Advanced Cyber Security</span>
+        <span class="cert-code">DACS</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>skill_matrix</h2>
+    <div class="skill">
+      <div class="skill-top"><span class="skill-name">Web Application Penetration Testing</span><span class="skill-pct">92%</span></div>
+      <div class="bar"><div class="bar-fill" data-w="92"></div></div>
+    </div>
+    <div class="skill">
+      <div class="skill-top"><span class="skill-name">Vulnerability Assessment</span><span class="skill-pct">88%</span></div>
+      <div class="bar"><div class="bar-fill" data-w="88"></div></div>
+    </div>
+    <div class="skill">
+      <div class="skill-top"><span class="skill-name">Network Security</span><span class="skill-pct">85%</span></div>
+      <div class="bar"><div class="bar-fill" data-w="85"></div></div>
+    </div>
+    <div class="skill">
+      <div class="skill-top"><span class="skill-name">OWASP Top 10 Methodologies</span><span class="skill-pct">90%</span></div>
+      <div class="bar"><div class="bar-fill" data-w="90"></div></div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <h2>experience.log</h2>
+    <div class="role">
+      <span class="role-marker">&gt;</span>
+      <div>
+        <div class="role-title">Web Penetration Tester — PKCERT (National CERT of Pakistan)</div>
+        <div class="role-meta">Islamabad, Pakistan · Ongoing</div>
+        <p class="role-desc">Contributing to PKCERT's CTF platform, VDP portal, and Cyber Patriot program — supporting vulnerability discovery and responsible disclosure processes for Pakistan's digital infrastructure.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="connect">
+    <h2>connect</h2>
+    <div class="connect-list">
+      <a class="connect-link" href="https://linkedin.com/in/saim-ali-malik-pk" target="_blank" rel="noopener">
+        <span>LinkedIn — /in/saim-ali-malik-pk</span>
+        <span class="connect-arrow mono">↗</span>
+      </a>
+      <a class="connect-link" href="https://instagram.com/saimalimalik.sec" target="_blank" rel="noopener">
+        <span>Instagram — @saimalimalik.sec</span>
+        <span class="connect-arrow mono">↗</span>
+      </a>
+      <a class="connect-link" href="https://ctf.pkcert.gov.pk" target="_blank" rel="noopener">
+        <span>PKCERT CTF Platform</span>
+        <span class="connect-arrow mono">↗</span>
+      </a>
+    </div>
+  </section>
+
+  <footer>Islamabad, Pakistan // Saim Ali Malik // Built 2026</footer>
+</div>
+
+<script>
+  function typeInto(el, text, speed, onDone){
+    let i = 0;
+    (function step(){
+      if(i <= text.length){
+        el.textContent = text.slice(0, i);
+        i++;
+        setTimeout(step, speed);
+      } else if(onDone){ onDone(); }
+    })();
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const l1 = document.getElementById('typedLine1');
+    const l2 = document.getElementById('typedLine2');
+    typeInto(l1, 'Saim Ali Malik', 45, () => {
+      setTimeout(() => {
+        typeInto(l2, 'Web Penetration Tester | Ethical Hacker', 30);
+      }, 200);
+    });
+
+    // animate skill bars once visible
+    const bars = document.querySelectorAll('.bar-fill');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          const el = entry.target;
+          el.style.width = el.dataset.w + '%';
+          io.unobserve(el);
+        }
+      });
+    }, {threshold:0.4});
+    bars.forEach(b => io.observe(b));
+  });
+</script>
+</body>
+</html>
