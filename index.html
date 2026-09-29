@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Saim Ali Malik — Web Penetration Tester</title>
-<meta name="description" content="Saim Ali Malik is a web penetration tester and ethical hacker based in Islamabad, Pakistan, specializing in vulnerability research, OWASP Top 10 testing, and responsible disclosure. Contributor at PKCERT.">
+<meta name="description" content="Saim Ali Malik is a web penetration tester and ethical hacker based in Islamabad, Pakistan, specializing in vulnerability research, OWASP Top 10 testing, and responsible disclosure. Contributor to PKCERT's CTF Square.">
 <link rel="canonical" href="https://saimalimalik-sec.github.io">
 <meta property="og:title" content="Saim Ali Malik | Web Penetration Tester">
 <meta property="og:description" content="Ethical Hacker and Web Penetration Tester based in Islamabad, Pakistan.">
@@ -20,6 +20,10 @@
   "description": "Ethical Hacker and Web Penetration Tester based in Islamabad, Pakistan",
   "image": "https://saimalimalik-sec.github.io/saim-ali-malik-web-penetration-tester.jpg",
   "url": "https://saimalimalik-sec.github.io",
+  "alumniOf": {
+    "@type": "CollegeOrUniversity",
+    "name": "Capital University of Science & Technology"
+  },
   "sameAs": [
     "https://linkedin.com/in/saimalimalik-sec",
     "https://instagram.com/saimalimalik.sec",
@@ -58,7 +62,6 @@
   }
   .mono{font-family:'JetBrains Mono',monospace;}
 
-  /* subtle scanline overlay */
   .scanlines{
     position:fixed; inset:0; pointer-events:none; z-index:50;
     background:repeating-linear-gradient(
@@ -73,7 +76,6 @@
 
   .wrap{max-width:720px; margin:0 auto; padding:32px 20px 80px;}
 
-  /* Terminal window */
   .terminal{
     background:var(--panel);
     border:1px solid var(--panel-border);
@@ -114,7 +116,6 @@
   #typedName{color:var(--text); font-weight:700;}
   #typedTitle{color:var(--text-dim);}
 
-  /* visually-hidden but crawlable heading */
   .visually-hidden{
     position:absolute;
     width:1px; height:1px;
@@ -125,7 +126,6 @@
     border:0;
   }
 
-  /* Sections */
   section{margin-top:56px;}
   h2{
     font-family:'JetBrains Mono',monospace;
@@ -168,6 +168,14 @@
   .cert-name{color:var(--text);}
   .cert-code{color:var(--text-dim); font-family:'JetBrains Mono',monospace; font-size:12px;}
 
+  .edu-row{
+    padding:12px 0;
+    border-bottom:1px solid var(--panel-border);
+  }
+  .edu-row:last-child{border-bottom:none;}
+  .edu-title{color:var(--text); font-weight:600; font-size:14px;}
+  .edu-meta{color:var(--text-dim); font-size:13px; margin-top:2px;}
+
   .skill{margin-bottom:14px;}
   .skill-top{display:flex; justify-content:space-between; font-size:13px; margin-bottom:6px;}
   .skill-name{color:var(--text);}
@@ -187,7 +195,12 @@
   .role-marker{color:var(--green-ok); font-family:'JetBrains Mono',monospace; font-size:13px; padding-top:2px;}
   .role-title{font-weight:600; color:var(--text); font-size:15px;}
   .role-meta{color:var(--text-dim); font-size:13px; margin:2px 0 6px;}
-  .role-desc{color:var(--text); font-size:14px; margin:0;}
+  .role-desc{color:var(--text); font-size:14px; margin:0 0 10px;}
+  .role-highlight{
+    font-size:13px; color:var(--text-dim);
+    padding-left:16px; position:relative; margin-bottom:4px;
+  }
+  .role-highlight::before{content:"›"; position:absolute; left:0; color:var(--amber);}
 
   .connect-list{display:flex; flex-direction:column; gap:10px;}
   .connect-link{
@@ -243,7 +256,21 @@
     <h2>about</h2>
     <img class="profile-photo" src="saim-ali-malik-web-penetration-tester.jpg" alt="Saim Ali Malik - Web Penetration Tester and Ethical Hacker, Islamabad, Pakistan">
     <p>Web Penetration Tester and Ethical Hacker based in Islamabad, Pakistan, focused on identifying and responsibly reporting vulnerabilities in web applications and network infrastructure.</p>
-    <p>Currently managing and building <strong>PKCERT's</strong> (National CERT of Pakistan) CTF Square Cyber Range, alongside handling their VDP portal and Cyber Patriot program.</p>
+    <p>Currently managing and building <strong>PKCERT's</strong> (National CERT of Pakistan) CTF Square Cyber Range, alongside handling their VDP portal and Cyber Patriot program. Pursuing a BS in Cyber Security at Capital University of Science &amp; Technology (CUST), Islamabad.</p>
+  </section>
+
+  <section id="education">
+    <h2>education</h2>
+    <div class="card">
+      <div class="edu-row">
+        <div class="edu-title">BS in Cyber Security</div>
+        <div class="edu-meta">Capital University of Science &amp; Technology (CUST), Islamabad — In Progress</div>
+      </div>
+      <div class="edu-row">
+        <div class="edu-title">Diploma in Advanced Cyber Security (DACS)</div>
+        <div class="edu-meta">PNY Trainings, Lahore/Islamabad</div>
+      </div>
+    </div>
   </section>
 
   <section id="certs">
@@ -258,8 +285,16 @@
         <span class="cert-code">CCNA</span>
       </div>
       <div class="cert-row">
-        <span class="cert-name">Diploma in Advanced Cyber Security</span>
-        <span class="cert-code">DACS</span>
+        <span class="cert-name">Computer Hacking Forensic Investigator</span>
+        <span class="cert-code">CHFI</span>
+      </div>
+      <div class="cert-row">
+        <span class="cert-name">Introduction to Cyber Security</span>
+        <span class="cert-code">Google</span>
+      </div>
+      <div class="cert-row">
+        <span class="cert-name">Networking Program Completions</span>
+        <span class="cert-code">Cisco NetAcad</span>
       </div>
     </div>
   </section>
@@ -291,7 +326,9 @@
       <div>
         <div class="role-title">Web Penetration Tester — PKCERT (National CERT of Pakistan)</div>
         <div class="role-meta">Islamabad, Pakistan · Ongoing</div>
-        <p class="role-desc">Managing and building PKCERT's CTF Square Cyber Range (ctf.pkcert.gov.pk) — including platform development and authoring Capture-the-Flag challenges across categories like Steganography, Network Security, Web Security, and OS Security — alongside handling PKCERT's Vulnerability Disclosure Program (VDP) and Cyber Patriot program.</p>
+        <p class="role-desc">Managing and building PKCERT's CTF Square Cyber Range (ctf.pkcert.gov.pk), with the goal of scaling it into a continuous, global-level platform — alongside handling PKCERT's Vulnerability Disclosure Program (VDP) and Cyber Patriot program.</p>
+        <div class="role-highlight">Conceptualized and integrated Dynamic Flags — a system that requires participants to write functional exploit scripts rather than share static flag strings</div>
+        <div class="role-highlight">Designs challenges spanning Web Security (OWASP Top 10), Network Security, and Digital Forensics &amp; Incident Response (DFIR)</div>
       </div>
     </div>
   </section>
@@ -352,7 +389,6 @@
       }, 200);
     });
 
-    // animate skill bars once visible
     const bars = document.querySelectorAll('.bar-fill');
     const io = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
